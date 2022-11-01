@@ -177,10 +177,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  rake (~> 12.0)
-  rspec (~> 3.0)
+  rake
+  rspec
   turnstile-captcha!
   webmock
 
 BUNDLED WITH
-   2.1.4
+   2.2.30

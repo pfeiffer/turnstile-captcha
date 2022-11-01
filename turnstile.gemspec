@@ -30,6 +30,7 @@ Gem::Specification.new do |spec|
 
   # Tests
   spec.add_development_dependency "webmock"
+  spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec"
 
   spec.add_dependency "faraday"
