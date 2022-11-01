@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    turnstile-captcha (0.1.2)
+    turnstile-captcha (0.1.3)
       faraday
       hashie
       rails (>= 6.1.0)
