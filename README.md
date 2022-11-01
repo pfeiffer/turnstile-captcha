@@ -43,7 +43,21 @@ To output the required tags, use `captcha_javascript_tag`, eg in your `<head>` t
 And in your form, output the placeholder tag. You can provide an [`action`](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/#configurations):
 
 ```erb
-<%= captcha_placeholder_tag action: "login" %>
+<%= form_for @user do |f| %>
+  ..
+  <%= captcha_placeholder_tag action: "login" %>
+  ..
+<% end %>
+```
+
+You can also output both of these tags together, eg. if you only have a single form on the page:
+
+```erb
+<%= form_for @user do |f| %>
+  ...
+  <%= captcha_tags action: "login" %>
+  ...
+<% end %>
 ```
 
 Upon submission, you can now validate the request using `valid_captcha?`:
@@ -59,7 +73,8 @@ end
 ```
 
 Inspired by the [recaptcha gem](https://github.com/ambethia/recaptcha) you can provide a `model:` option.
-In case of captcha failure, an error message will be added to the provided model on the `:base`:
+In case of captcha failure, an `:invalid_captcha` error will be added to the provided model on the `:base`,
+which can be localized using Rails I18n.
 
 ```ruby
 class UsersController < ..
@@ -68,17 +83,30 @@ class UsersController < ..
 
     if valid_captcha?(model: @user)
       # Perform
+    else
+      # @user.errors.details
+      # => {:base=>[{error: :invalid_captcha}]}
     end
   end
 end
 ```
 
-You can add an `on_failure` handler to for instance instrument failures. The proc will be called with the verification
-result from Cloudflare:
+## Configuration
+
+You can add an `on_failure` handler to for instance instrument failures.
+The proc will be called with the verification result from Cloudflare:
 
 ```ruby
 Turnstile.configure do |config|
   config.on_failure = ->(verification) { ErrorNotifier.notify("Captcha failure: #{verification.result}") }
+end
+```
+
+It is also possible to globally disable/enable Turnstile captcha validation, eg. in CI:
+
+```ruby
+Turnstile.configure do |config|
+  config.enabled = ENV["ENABLE_TURNSTILE"]
 end
 ```
 
