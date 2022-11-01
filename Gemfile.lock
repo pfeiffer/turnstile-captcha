@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    turnstile-captcha (0.1.1)
+    turnstile-captcha (0.1.2)
       faraday
       hashie
       rails (>= 6.1.0)
@@ -183,4 +183,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   2.2.30
+   2.3.4
