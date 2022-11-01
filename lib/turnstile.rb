@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "turnstile/version"
 require "turnstile/configuration"
 require "turnstile/controller_methods"
 require "turnstile/view_helpers"
