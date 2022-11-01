@@ -3,16 +3,12 @@
 A gem to add [Cloudflare Turnstile](https://blog.cloudflare.com/turnstile-private-captcha-alternative/) to your Rails app.
 
 ```ruby
-gem 'turnstile-captcha'
+gem 'turnstile-captcha', require: 'turnstile'
 ```
 
 And then execute:
 
     $ bundle install
-
-Or install it yourself as:
-
-    $ gem install turnstile-captcha
 
 ## Usage
 
@@ -27,22 +23,7 @@ Turnstile.configure do |config|
 end
 ```
 
-In your controller, include the `Turnstile::ControllerMethods` module. This could be in a concern
-or in your `ApplicationController`
-
-```ruby
-class ApplicationController < ..
-  include Turnstile::ControllerMethods
-end
-```
-
-The gem also provides a helper module to generate the required tags by Turnstile:
-
-```ruby
-class ApplicationController < ..
-  helper Turnstile::ViewHelpers
-end
-```
+You now have access to the Turnstile view and controller helpers.
 
 To output the required tags, use `captcha_javascript_tag`, eg in your `<head>` tag:
 
