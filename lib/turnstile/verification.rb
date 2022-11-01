@@ -37,6 +37,7 @@ class Turnstile::Verification
     @client ||= Faraday.new do |conn|
       conn.request :url_encoded
       conn.response :json
+      conn.adapter Faraday.default_adapter
     end
   end
 end
