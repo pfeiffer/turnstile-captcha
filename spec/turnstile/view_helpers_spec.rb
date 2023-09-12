@@ -30,5 +30,10 @@ describe Turnstile::ViewHelpers do
       expect(captcha_tags(action: "login")).to include captcha_javascript_tag
       expect(captcha_tags(action: "login")).to include captcha_placeholder_tag(action: "login")
     end
+
+    it "allows overriding the javascript tag options" do
+      expect(captcha_tags(action: "login", javascript_tag: { async: false }))
+        .to include javascript_include_tag(Turnstile.configuration.script_url, async: false, defer: true)
+    end
   end
 end
