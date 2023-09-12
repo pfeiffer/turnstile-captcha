@@ -2,14 +2,16 @@
 
 module Turnstile::ViewHelpers
   def captcha_tags(options = {})
+    javascript_tag_options = options.delete(:javascript_tag) || {}
+
     [
-      captcha_javascript_tag,
+      captcha_javascript_tag(javascript_tag_options),
       captcha_placeholder_tag(options)
     ].join.html_safe
   end
 
-  def captcha_javascript_tag
-    javascript_include_tag Turnstile.configuration.script_url, async: true, defer: true
+  def captcha_javascript_tag(options = {})
+    javascript_include_tag Turnstile.configuration.script_url, **options.reverse_merge(async: true, defer: true)
   end
 
   def captcha_placeholder_tag(options = {})
