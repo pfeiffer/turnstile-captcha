@@ -27,6 +27,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec"
 
   spec.add_dependency "faraday"
-  spec.add_dependency "rails", ">= 6.1.0"
+  spec.add_dependency "rails"
   spec.add_dependency "hashie"
 end
